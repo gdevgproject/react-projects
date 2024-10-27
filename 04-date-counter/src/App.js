@@ -23,24 +23,36 @@ function Counter() {
   }).format(date);
 
   date.setDate(date.getDate() + count);
+
+  function handleStep(e) {
+    setStep(+e.target.value);
+  }
+
+  function handleCount(e) {
+    setCount(+e.target.value);
+  }
+
+  function handleReset() {
+    setStep(1);
+    setCount(0);
+  }
   return (
     <div>
       <div>
-        <button
-          onClick={() =>
-            setStep((curStep) => (curStep > 0 ? curStep - 1 : curStep))
-          }
-        >
-          -
-        </button>
-        <span>Step: {step}</span>
-        <button onClick={(curStep) => setStep((curStep) => curStep + 1)}>
-          +
-        </button>
+        <input
+          type="range"
+          step="1"
+          min="1"
+          max="10"
+          value={step}
+          onChange={handleStep}
+        ></input>
+
+        <span>{step}</span>
       </div>
       <div>
         <button onClick={() => setCount(count - step)}>-</button>
-        <span>Count: {count}</span>
+        <input type="text" value={count} onChange={handleCount}></input>
         <button onClick={() => setCount(count + step)}>+</button>
       </div>
       <p>
@@ -53,6 +65,11 @@ function Counter() {
         </span>
         <span>{formattedDate}</span>
       </p>
+      {count !== 0 || step !== 1 ? (
+        <button onClick={handleReset}>Reset</button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
