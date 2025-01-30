@@ -34,11 +34,11 @@ export default function App() {
 
   return (
     <>
+      {/* Khung giao diện */}
       <NavBar>
         <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </NavBar>
-
       <Main>
         <Box>
           {/* {isLoading ? <Loader /> : <MovieList movies={movies} />} */}
@@ -105,6 +105,7 @@ function Logo() {
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
+  // Án nút enter focus vào ô search
   useKey("Enter", function () {
     if (document.activeElement === inputEl.current) return;
     inputEl.current.focus();
